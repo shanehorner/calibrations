@@ -20,17 +20,25 @@ TOOLS:
 
 roo_DeltaPAnalysis:
 
-	Runs over KshortReconstruction output files using kshort_variables. Perturbs the x and y components of each pion in each reconstructed pair, then re-reconstructs each pair with the perturbed vectors, and re-calculates invariant mass and pT. Each perturbed mass and respective pT is saved into a RooDataSet as a point.
+	Runs over KshortReconstruction output files using kshort_variables. Perturbs the x
+and y components of each pion in each reconstructed pair, then re-reconstructs each pair
+with the perturbed vectors, and re-calculates invariant mass and pT. Each perturbed mass
+and respective pT is saved into a RooDataSet as a point.
 
 
 multirun_analyze_kshort_mom:
 
-	Runs over Tony Frawley's kshort data files to create and save a RooDataSet of Mass vs pT using kshort_variables. 
+	Runs over Tony Frawley's kshort data files to create and save a RooDataSet of Mass
+vs pT using kshort_variables. 
 
 
 single_plot_analyze_kshort_mom:
 
-	Groups the outputs from a specified RooDataSet into pT slices. Plots and saves a histogram of reconstructed mass, and fits the mass width for each slice using a gaussian+exponential function in RooFit. Plots and saves a TGraphErrors containing each pT slice and its corresponding mass width. Use this to get the TGraphErrors for the data. It can also be used to inspect individual perturbed simulations more thoroughly.
+	Groups the outputs from a specified RooDataSet into pT slices. Plots and saves a
+histogram of reconstructed mass, and fits the mass width for each slice using a
+gaussian+exponential function in RooFit. Plots and saves a TGraphErrors containing each pT
+slice and its corresponding mass width. Use this to get the TGraphErrors for the data. It
+can also be used to inspect individual perturbed simulations more thoroughly.
 	
 
 fast_bulk_plot_analyze_kshort_mom:
