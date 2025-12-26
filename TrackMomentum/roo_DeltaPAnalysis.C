@@ -45,17 +45,19 @@ void roo_DeltaPAnalysis(const int num = 399)
  
 {
 
-  // a0 = multiple scattering term, a1 = detector resolution term.
+  // a0 = multiple scattering term, a1 = detector resolution term. 
   int ngrid = 80;
   int a = num%ngrid;
   int b = num/ngrid;
 
   std::cout << "a: " << a << " , b: " << b << endl;
 
+  // Set range of a0 and a1 in the grid
   float a0start = 0.0178;
   float a0end = 0.0189; 
   float a1start = 0.0;
   float a1end = 0.012;
+  
 
   float da0 = (a0end-a0start)/ngrid;
   float da1 = (a1end-a1start)/ngrid;
@@ -65,6 +67,7 @@ void roo_DeltaPAnalysis(const int num = 399)
 
   std::cout << "a0: " << a0 << " , a1: " << a1 << endl;
 
+  // Set output filenames
   char outname[500];
   sprintf(outname, "sim_rds/kshort_%d.root", num);
   
@@ -121,15 +124,9 @@ void roo_DeltaPAnalysis(const int num = 399)
 	  perturbMom(p_x1,p_y1,p_z1,a0,a1);
 	  perturbMom(p_x2,p_y2,p_z2,a0,a1);
 	  
-	  //  deltaP(p_x1, p_y1, p_z1, p_x2, p_y2, p_z2, a0, a1);
-	  // std::cout << "perturbed succesfully. " << std::endl;
-
-	  
+	 
 	}
 
-
-      	// std::cout << "after: " << "px2: " << p_x2 << " py2: " << p_y2 << " pz2: " << p_z2 << endl;
-	
 	float NewInvMass = 0;
 	float NewInvPt = 0;
 	double E1 = sqrt(p_x1*p_x1 + p_y1*p_y1 + p_z1*p_z1 + decaymass*decaymass);
@@ -142,18 +139,12 @@ void roo_DeltaPAnalysis(const int num = 399)
         NewInvMass = tsum.M();
         NewInvPt = tsum.Pt();
 
-	//     	std::cout << "new inv. mass: " << NewInvMass << " old inv. mass: " << KSRInvMass << endl;
-	//	std::cout << "new pt: " << NewInvPt << " old pt: " << KSRInvPt << endl;
 
 	if (NewInvMass<0.2 || NewInvMass>0.7) continue; // perturbed mass cut
 
 	rPt.setVal(NewInvPt);
 	rMass.setVal(NewInvMass);
 	rmpt->add(vars);
-	
-
-	//      std::cout << "new invariant mass: " << NewInvMass << endl;
-
 	
       }
   delete ntp;
