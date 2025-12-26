@@ -5,7 +5,12 @@ Email: sh22f@fsu.edu
 
 OVERVIEW:
 
-	These macros serve as machinery to analyze the momentum resolution of sPHENIX using K-Shorts by perturbing simulation pT. They plot mass resolution as a function of pT so that the perturbed simulations can be compared to the data. The pT resolution has two independent components - the multiple scattering term, and the detector resolution term. This machinery runs over a grid of possible combinations of each term, and generates a contour plot of the combinations that most closely replicate the data.
+These macros serve as machinery to analyze the momentum resolution of sPHENIX
+using K-Shorts by perturbing simulation pT. They plot mass resolution as a function of
+pT so that the perturbed simulations can be compared to the data. The pT resolution has
+two independent components - the multiple scattering term, and the detector resolution
+term. This machinery runs over a grid of possible combinations of each term, and generates
+a contour plot of the combinations that most closely replicate the data.
 
 MY WORKING DIRECTORY:
 /sphenix/user/shanehorner/macros/detectors/sPHENIX/unbinned
@@ -30,33 +35,45 @@ single_plot_analyze_kshort_mom:
 
 fast_bulk_plot_analyze_kshort_mom:
 
-	This is a condensed version of single_plot_analyze_kshort_mom designed to run over the entire grid and save a TGraphErrors of mass width as a function of pT for each perturbation.
+	This is a condensed version of single_plot_analyze_kshort_mom designed to run over
+the entire grid and save a TGraphErrors of mass width as a function of pT for each
+perturbation.
 
 
 chi_square_kshort_2d:
 
-	Generates chi-square surface (TGraph2D) by comparing the simulations to the data. Extracts contours and finds the grid point which minimize the chi-square value. Saves the contours and TGraph2D as plots. Outputs the lowest chi-sq value in the terminal and the corresponding file to use for compare_kshort_simvdata.
+	Generates chi-square surface (TGraph2D) by comparing the simulations to the data.
+Extracts contours and finds the grid point which minimize the chi-square value. Saves the
+contours and TGraph2D as plots. Outputs the lowest chi-sq value in the terminal and the
+corresponding file to use for compare_kshort_simvdata.
 
 compare_kshort_simvdata:
 
-	Sanity check - use this to overlay TGraphErrors of the data with your perturbed TGraphErrors of choice. For example, chi_square_kshort_2d will output the filename which matches the data closest, so you can compare the data with the file it gives you. 
+	Sanity check - use this to overlay TGraphErrors of the data with your perturbed
+TGraphErrors of choice. For example, chi_square_kshort_2d will output the filename which
+matches the data closest, so you can compare the data with the file it gives you. 
 
 
 plot_sim_width:
 
-	(Extra tool) Extracts the widths in slices of the raw simulation data without any perturbations, and fits a TF1 of the multiple scattering and detector resolution parameters to delta pt vs pt of the simulations.
+	(Extra tool) Extracts the widths in slices of the raw simulation data without any
+perturbations, and fits a TF1 of the multiple scattering and detector resolution
+parameters to delta pt vs pt of the simulations.
 
 
 SCRIPTS:
 
 runit_kshort_muddy:
 
-Feeds input argument to roo_DeltaPAnalysis, which determines the perturbation parameters for that element of the grid. Then, runs fast_bulk_plot_analyze_kshort_mom with the same input argument. 
+	Feeds input argument to roo_DeltaPAnalysis, which determines the perturbation
+parameters for that element of the grid. Then, runs fast_bulk_plot_analyze_kshort_mom with
+the same input argument. 
 
 
 condor_muddy_kshort_mom:
 
-Queue the number of elements in the grid (ngrid in roo_DeltaPAnalysis)^2 to run runit_kshort_muddy over the entire grid.
+	Queue the number of elements in the grid (ngrid in roo_DeltaPAnalysis)^2 to run
+runit_kshort_muddy over the entire grid.
 
 
 
